@@ -1,4 +1,8 @@
-function Employees({employees}) {
+import { useSelector } from 'react-redux';
+
+function Employees() {
+  const employees = useSelector((state) => state.employees);
+
   return (<table>
     <tr>
       <td>Ename</td>
@@ -12,7 +16,6 @@ function Employees({employees}) {
     {
       employees.map(employee => {
         const { ename, job, mgr_id, hireddate, sal, comm, department_id } = employee;
-        console.log(employee);
         return(<tr>
           <td>{ename}</td>
           <td>{job}</td>

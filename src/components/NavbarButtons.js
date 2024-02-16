@@ -1,19 +1,11 @@
-import {useState} from 'react';
-import Employees from '../components/Employees'
+import { useNavigate } from 'react-router-dom';
 
 function NavbarButtons() {
-  const [employees, setEmployees] = useState([])
-  const fetchEmployees = () => {
-    fetch('http://localhost:3001/employees', { method: 'GET' })
-      .then(res => res.json())
-      .then(data => setEmployees(data))
-      .catch(err => console.log(err))
-  }
-
+  const navigate = useNavigate();
   return(
     <>
-      <button onClick={fetchEmployees}>All employees</button>
-      {employees.length > 0 ? <Employees employees={employees} /> : null}
+      <button onClick={() => navigate('/employees')}>All employees</button>
+      <button onClick={() => navigate('/departments')}>All departments</button>
     </>
   )
 }

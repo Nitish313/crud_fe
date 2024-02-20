@@ -2,12 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const employeeSlice = createSlice({
   name: 'employees',
-  initialState: [],
+  initialState: {employees: [], sortOrder: 'asc'},
   reducers: {
     viewEmployees: (state, action) => {
-      const employees = action.payload
-
-      state.push(...employees);
+      let { employees, order } = action.payload
+      let sortedEmployees = employees.slice().sort((a, b) => {
+        if (order === 'asc') {
+          return a.ename.localeCompare(b.ename);
+        } else {
+          return b.ename.localeCompare(a.ename);
+        }
+      });
+      state.employees = sortedEmployees;
+      state.sortOrder = order
     }
   },
 });
